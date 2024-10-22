@@ -58,15 +58,15 @@ public class NextDate {
         }
         //is this month December?
 <span class="fc bfc" id="L60" title="All 2 branches covered.">        else if (isDecember(month)) {</span>
-<span class="pc bpc" id="L61" title="1 of 2 branches missed.">            if (day &lt;= 31) //if the day is not 31, just increment the next day</span>
+<span class="fc bfc" id="L61" title="All 2 branches covered.">            if (day &lt; 31) //if the day is not 31, just increment the next day</span>
 <span class="fc" id="L62">                tomorrowDay = day + 1;</span>
             else { //day is 31, reset the day and month to 1 and increment the year
-<span class="nc" id="L64">                tomorrowDay = 1;</span>
-<span class="nc" id="L65">                tomorrowMonth = 1;</span>
-<span class="nc bnc" id="L66" title="All 2 branches missed.">                if (year == 2021) //make sure the next year is within ht permissible range</span>
-<span class="nc" id="L67">                    return &quot;Invalid Next Year&quot;;</span>
+<span class="fc" id="L64">                tomorrowDay = 1;</span>
+<span class="fc" id="L65">                tomorrowMonth = 1;</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">                if (year == 2021) //make sure the next year is within ht permissible range</span>
+<span class="fc" id="L67">                    return &quot;Invalid Next Year&quot;;</span>
                 else  //it was a permissible year - go ahead and increment the year
-<span class="nc" id="L69">                    tomorrowYear = year + 1;</span>
+<span class="fc" id="L69">                    tomorrowYear = year + 1;</span>
             }
 
         }
@@ -107,7 +107,7 @@ public class NextDate {
      */
 
     private static boolean isThirtyOneDayMonth(int month) {
-<span class="pc bpc" id="L110" title="4 of 10 branches missed.">        return month == 1 || month == 3 || month == 5 || month == 8 || month == 10;</span>
+<span class="fc bfc" id="L110" title="All 10 branches covered.">        return month == 1 || month == 3 || month == 5 || month == 8 || month == 10;</span>
     }
 
 
@@ -120,7 +120,7 @@ public class NextDate {
      */
 
     private static boolean isThirtyDayMonth(int month) {
-<span class="pc bpc" id="L123" title="3 of 8 branches missed.">        return month == 4 || month == 6 || month == 9 || month == 11;</span>
+<span class="fc bfc" id="L123" title="All 8 branches covered.">        return month == 4 || month == 6 || month == 9 || month == 11;</span>
     }
 
 
@@ -163,8 +163,8 @@ public class NextDate {
      */
 
     private static boolean isLeapYear(int year) {
-<span class="pc bpc" id="L166" title="1 of 2 branches missed.">        if ((year % 100) == 0)</span>
-<span class="nc bnc" id="L167" title="All 2 branches missed.">            return (year % 400) == 0;</span>
+<span class="fc bfc" id="L166" title="All 2 branches covered.">        if ((year % 100) == 0)</span>
+<span class="fc bfc" id="L167" title="All 2 branches covered.">            return (year % 400) == 0;</span>
         else
 <span class="fc bfc" id="L169" title="All 2 branches covered.">            return (year % 4) == 0;</span>
     }
@@ -177,25 +177,22 @@ public class NextDate {
      */
 
     public static void main(String[] args) {
-<span class="nc" id="L180">        System.out.println(&quot;TEST&quot;);</span>
-        NextDate q;
-        int month1, day1, year1;
-
-
-<span class="nc" id="L185">        q = new NextDate(</span>
-                month1 = 11,
-                day1 = 18,
-                year1 = 2018);
-
-
-<span class="nc" id="L191">        System.out.println(&quot;Type: &quot; + q.run(month1, day1, year1));</span>
+//        System.out.println(&quot;TEST&quot;);
+//        NextDate q;
+//        int month1, day1, year1;
+//
+//
+//        q = new NextDate(
+//                month1 = 11,
+//                day1 = 18,
+//                year1 = 2018);
+//
+//
+//        System.out.println(&quot;Type: &quot; + q.run(month1, day1, year1));
 
 <span class="nc" id="L193">    }</span>
 
 
 }
-//
-//NextDate {
-//
-//}
+
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
