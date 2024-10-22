@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NextDate.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">assignment-nextdate</a> &gt; <a href="index.source.html" class="el_package">whitebox</a> &gt; <span class="el_source">NextDate.java</span></div><h1>NextDate.java</h1><pre class="source lang-java linenums">package whitebox;
+//import java.io.*;
+//import java.util.*;
+
+
+public class NextDate {
+
+    int month;
+    int day;
+    int year;
+
+<span class="fc" id="L12">    public NextDate(int m, int d, int y) {</span>
+        //Initialize the mont, day, and year, respectively
+<span class="fc" id="L14">        month = m;</span>
+<span class="fc" id="L15">        day = d;</span>
+<span class="fc" id="L16">        year = y;</span>
+<span class="fc" id="L17">    }</span>
+
+
+    /*********************************************************
+     **Method: run
+     **Returns: string
+     **Description: This method will return a string depicting the nextDate in the from MM/DD/YY
+     ***********************************************************/
+
+    public String run(int month, int day, int year) {
+
+        //Restrictions that the year must have the following invariant: 1801 &lt;= year &lt;= 2021
+
+<span class="pc bpc" id="L30" title="5 of 10 branches missed.">        if (day &lt; 1 || month &lt; 1 || month &gt; 12 || year &lt; 1801 || year &gt; 2021)</span>
+<span class="nc" id="L31">            return &quot;invalid Input Date&quot;;</span>
+
+        //these variables will hold the proper values for the nextDate's day, month, and year values, respectively
+<span class="fc" id="L34">        int tomorrowDay = day;</span>
+<span class="fc" id="L35">        int tomorrowMonth = month;</span>
+<span class="fc" id="L36">        int tomorrowYear = year;</span>
+
+        //Is this month with 31 days?
+<span class="pc bpc" id="L39" title="1 of 2 branches missed.">        if (isThirtyOneDayMonth(month)) {</span>
+<span class="pc bpc" id="L40" title="1 of 2 branches missed.">            if (day &lt; 31) //if the day is not 31, just increment the day</span>
+<span class="fc" id="L41">                tomorrowDay = day + 1;</span>
+            else { //day = 31, set tomorrow's day to 1 and increment the month
+<span class="nc" id="L43">                tomorrowDay = 1;</span>
+<span class="nc" id="L44">                tomorrowMonth = month + 1;</span>
+            }
+        }
+        //is this month a month with 30 days?
+<span class="nc bnc" id="L48" title="All 2 branches missed.">        else if (isThirtyDayMonth(month)) {</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">            if (day &lt; 30) //if the day is not 30, just increment the day</span>
+<span class="nc" id="L50">                tomorrowDay = day + 1;</span>
+            else {
+<span class="nc bnc" id="L52" title="All 2 branches missed.">                if (day == 30) {</span>
+<span class="nc" id="L53">                    tomorrowDay = 1;</span>
+<span class="nc" id="L54">                    tomorrowMonth = month + 1;</span>
+                } else //invalid input ... too many days
+<span class="nc" id="L56">                    return &quot;Invalid Input Date&quot;;</span>
+            }
+        }
+        //is this month December?
+<span class="nc bnc" id="L60" title="All 2 branches missed.">        else if (isDecember(month)) {</span>
+<span class="nc bnc" id="L61" title="All 2 branches missed.">            if (day &lt;= 31) //if the day is not 31, just increment the next day</span>
+<span class="nc" id="L62">                tomorrowDay = day + 1;</span>
+            else { //day is 31, reset the day and month to 1 and increment the year
+<span class="nc" id="L64">                tomorrowDay = 1;</span>
+<span class="nc" id="L65">                tomorrowMonth = 1;</span>
+<span class="nc bnc" id="L66" title="All 2 branches missed.">                if (year == 2021) //make sure the next year is within ht permissible range</span>
+<span class="nc" id="L67">                    return &quot;Invalid Next Year&quot;;</span>
+                else  //it was a permissible year - go ahead and increment the year
+<span class="nc" id="L69">                    tomorrowYear = year + 1;</span>
+            }
+
+        }
+        //is this month February? we need to check for leap years and such
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        else if (isFebruary(month)) {</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">            if (day &lt; 28) //just a standard day - increment the day</span>
+<span class="nc" id="L76">                tomorrowDay = day + 1;</span>
+            else {
+<span class="nc bnc" id="L78" title="All 2 branches missed.">                if (day == 28) {  //if this is not a leap year, reset day and increment the day</span>
+<span class="nc bnc" id="L79" title="All 2 branches missed.">                    if (isLeapYear(year)) //was a leap year</span>
+<span class="nc" id="L80">                        tomorrowDay = 29;</span>
+                    else {  //was not a leap year
+<span class="nc" id="L82">                        tomorrowDay = 1;</span>
+<span class="nc" id="L83">                        tomorrowMonth = 3;</span>
+                    }
+<span class="nc bnc" id="L85" title="All 2 branches missed.">                } else if (day == 29) { //29th date of February</span>
+<span class="nc bnc" id="L86" title="All 2 branches missed.">                    if (isLeapYear(year)) {  //AND a leap year - reset the day to 1, month to 3</span>
+<span class="nc" id="L87">                        tomorrowDay = 1;</span>
+<span class="nc" id="L88">                        tomorrowMonth = 3;</span>
+                    } else
+<span class="nc" id="L90">                        return &quot;Invalid Input Date&quot;;</span>
+<span class="nc bnc" id="L91" title="All 2 branches missed.">                } else if (day &gt; 29) //invalid input as February will never have more than 29 days</span>
+<span class="nc" id="L92">                    return &quot;Invalid Input Date&quot;;</span>
+            }
+        }
+        //return the string representing the nextDate, in the form MM/DD/YY
+<span class="fc" id="L96">        return tomorrowMonth + &quot;/&quot; + tomorrowDay + &quot;/&quot; + tomorrowYear;</span>
+
+    }
+
+
+    /*********************************************
+     * Method: isThirtyOneDayMonth
+     * @param month
+     * @returns boolean
+     * Description: This method will return true is 'month' corresponds to a
+     * month that contains 31 days, excluding December
+     */
+
+    private static boolean isThirtyOneDayMonth(int month) {
+<span class="pc bpc" id="L110" title="9 of 10 branches missed.">        return month == 1 || month == 3 || month == 5 || month == 8 || month == 10;</span>
+    }
+
+
+    /*************************************************
+     * Method: isThirtyDayMonth
+     * @param month
+     * @returns boolean
+     * Description: This method will return true if 'month' corresponds to a
+     * month that contains 30 days.	 *
+     */
+
+    private static boolean isThirtyDayMonth(int month) {
+<span class="nc bnc" id="L123" title="All 8 branches missed.">        return month == 4 || month == 6 || month == 9 || month == 11;</span>
+    }
+
+
+    /**************************************************
+     * Method: isDecember
+     * @param month
+     * @returns boolean
+     * Description: This method will return true if 'month' corresponds to
+     * December
+     */
+
+    private static boolean isDecember(int month) {
+<span class="nc bnc" id="L136" title="All 2 branches missed.">        return month == 12;</span>
+    }
+
+
+    /****************************************************
+     * Method: isFebruary
+     * @param month
+     * @returns boolean
+     * Description: This method will return true if 'month' corresponds to
+     * February
+     */
+
+    private static boolean isFebruary(int month) {
+<span class="nc bnc" id="L149" title="All 2 branches missed.">        return month == 2;</span>
+    }
+
+
+    /*****************************************************
+     * Method: isLeapYear
+     * @param year
+     * @returns boolean
+     * Description: This method will return true if 'year' corresponds to a
+     * leap year. It works like this:
+     * 			*If the year is not a century year and divisible by 4,
+     * 			then it is a leap year
+     * 			*If the year is a century year, it is a leap year if and only if
+     * 			it is divisible by 400
+     */
+
+    private static boolean isLeapYear(int year) {
+<span class="nc bnc" id="L166" title="All 2 branches missed.">        if ((year % 100) == 0)</span>
+<span class="nc bnc" id="L167" title="All 2 branches missed.">            return (year % 400) == 0;</span>
+        else
+<span class="nc bnc" id="L169" title="All 2 branches missed.">            return (year % 4) == 0;</span>
+    }
+
+
+    /****************************************************
+     * Main method is only used for testing purposes, no unit tests need to
+     * be written for this method.
+     * @param args
+     */
+
+    public static void main(String[] args) {
+<span class="nc" id="L180">        System.out.println(&quot;TEST&quot;);</span>
+        NextDate q;
+        int month1, day1, year1;
+
+
+<span class="nc" id="L185">        q = new NextDate(</span>
+                month1 = 11,
+                day1 = 18,
+                year1 = 2018);
+
+
+<span class="nc" id="L191">        System.out.println(&quot;Type: &quot; + q.run(month1, day1, year1));</span>
+
+<span class="nc" id="L193">    }</span>
+
+
+}
+//
+//NextDate {
+//
+//}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

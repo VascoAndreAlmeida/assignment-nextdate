@@ -2,22 +2,14 @@ package whitebox;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class NextDateTest {
 
     @Test
-    void testValidDateIncrement() {
-
+    void testIsThirtyOneDayMonth(){
+        NextDate nextDate = new NextDate(1,31,2020);
+        assertEquals("Janeiro", nextDate.run(1,30,2020));
     }
-    @Test
-    void testEndOfMonthForThirtyDayMonths() {
 
-    }
-    @Test
-    void testInvalidDates() {
-
-    }
-    @Test
-    void testNextYearBoundary() {
-
-    }
 }
